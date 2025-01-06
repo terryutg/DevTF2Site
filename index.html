@@ -24,7 +24,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        .connect-btn {
+        .connect-btn, .install-btn {
             font-family: 'Montserrat', sans-serif; /* Шрифт сайта */
             background-color: #8a2be2; /* Фиолетовая кнопка */
             color: #fff;
@@ -37,7 +37,7 @@
             margin-top: 20px; /* Отступ сверху */
             cursor: pointer; /* Указатель при наведении */
         }
-        .connect-btn:hover {
+        .connect-btn:hover, .install-btn:hover {
             background-color: #7a1dcb; /* Более темный фиолетовый при наведении */
         }
         header {
@@ -122,52 +122,6 @@
             height: 20px;
             transition: opacity 0.3s ease;
         }
-
-        .copy-notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #555;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 16px;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 1s ease, visibility 1s ease;
-            z-index: 1000;
-        }
-
-        .install-notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #ff4500;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 18px;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 1s ease, visibility 1s ease;
-            z-index: 1000;
-            text-align: center;
-        }
-
-        .install-notification button {
-            background-color: #008CBA;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        .install-notification button:hover {
-            background-color: #0077b5;
-        }
     </style>
 </head>
 <body>
@@ -190,6 +144,12 @@
             <p>Чтобы присоединиться к нашему серверу, просто нажмите на кнопку ниже:</p>
             <button class="connect-btn" onclick="openAndCloseTab()">Подключиться к серверу</button>
         </div>
+        
+        <div class="server-info">
+            <h3>Не установили Team Fortress 2?</h3>
+            <p>У вас нету Team Fortress? Установите его через Steam!</p>
+            <button class="install-btn" onclick="openInstallTab()">Установить через Steam</button>
+        </div>
     </div>
 
     <div class="thank-you">
@@ -204,66 +164,41 @@
         <p>Все права защищены.</p>
     </footer>
 
-    <div class="copy-notification" id="copy-notification">
-        IP адрес скопирован!
-    </div>
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("ip-address");
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent.trim();
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
 
-    <!-- Уведомление для пользователей, у которых нет Team Fortress -->
-    <div class="install-notification" id="install-notification">
-        <p>У вас нет Team Fortress 2? Установите используя Steam!</p>
-        <button onclick="window.location.href='https://source-servers.vercel.app/TFInstall';">Установить через Steam</button>
-    </div>
-
-<script>
-    function copyToClipboard() {
-        var copyText = document.getElementById("ip-address");
-        var textArea = document.createElement("textarea");
-        textArea.value = copyText.textContent.trim();
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textArea);
-
-        // Показываем уведомление
-        var notification = document.getElementById("copy-notification");
-        notification.style.visibility = "visible";
-        notification.style.opacity = "1";
-
-        // Убираем уведомление через 2 секунды
-        setTimeout(function() {
-            notification.style.opacity = "0";
-            notification.style.visibility = "hidden";
-        }, 2000);
-
-        // Изменяем иконку на галочку
-        var copyIcon = document.getElementById("copy-icon");
-        copyIcon.src = "https://cdn.discordapp.com/attachments/1253332984350769202/1325811014742310933/check-mark.png?ex=677d253a&is=677bd3ba&hm=2ea6e745335478cb69fd32a631c5689a05569aab8d1c52d857cfcacc8bb6af7c"; // Поставим галочку
-        setTimeout(function() {
-            copyIcon.src = "https://cdn.discordapp.com/attachments/1253332984350769202/1325804846720487567/copied-icon.png?ex=677d1f7b&is=677bcdfb&hm=e26e38fe69272db843566fd9edfd8f588ccad55cf474d4a6b15ee32a057ebdb3&"; // Возвращаем иконку копирования
-        }, 1000); // Восстанавливаем через 1 секунду
-    }
-
-    function openAndCloseTab() {
-        const newTab = window.open("https://source-servers.vercel.app/TF2", "_blank");
-        setTimeout(() => {
-            if (newTab) {
-                newTab.close();
-            }
-        }, 2000); // Закрыть вкладку через 2 секунды
-
-        // Показываем уведомление об отсутствии игры
-        setTimeout(function() {
-            var installNotification = document.getElementById("install-notification");
-            installNotification.style.visibility = "visible";
-            installNotification.style.opacity = "1";
-
-            // Закрываем уведомление через 5 секунд
+            // Изменяем иконку на галочку
+            var copyIcon = document.getElementById("copy-icon");
+            copyIcon.src = "https://cdn.discordapp.com/attachments/1253332984350769202/1325811014742310933/check-mark.png?ex=677d253a&is=677bd3ba&hm=2ea6e745335478cb69fd32a631c5689a05569aab8d1c52d857cfcacc8bb6af7c"; // Поставим галочку
             setTimeout(function() {
-                installNotification.style.visibility = "hidden";
-                installNotification.style.opacity = "0";
-            }, 5000);
-        }, 2000); // Показываем уведомление через 2 секунды
-    }
-</script>
+                copyIcon.src = "https://cdn.discordapp.com/attachments/1253332984350769202/1325804846720487567/copied-icon.png?ex=677d1f7b&is=677bcdfb&hm=e26e38fe69272db843566fd9edfd8f588ccad55cf474d4a6b15ee32a057ebdb3&"; // Возвращаем иконку копирования
+            }, 1000); // Восстанавливаем через 1 секунду
+        }
+
+        function openAndCloseTab() {
+            const newTab = window.open("https://source-servers.vercel.app/TF2", "_blank");
+            setTimeout(() => {
+                if (newTab) {
+                    newTab.close();
+                }
+            }, 2000); // Закрыть вкладку через 2 секунды
+        }
+
+        function openInstallTab() {
+            const newTab = window.open("https://source-servers.vercel.app/TFInstall", "_blank");
+            setTimeout(() => {
+                if (newTab) {
+                    newTab.close();
+                }
+            }, 2000); // Закрыть вкладку через 2 секунды
+        }
+    </script>
 </body>
 </html>
