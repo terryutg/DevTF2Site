@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Официальный сервер Team Fortress 2 от DProd LLC">
+    <meta name="author" content="DProd LLC">
+    <title>Team Fortress 2 - Сервер DProd LLC</title>
+
+    <!-- Подключаем шрифт Montserrat через Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #181818; /* Темный фон */
+            color: #f0f0f0; /* Светлый текст */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+            flex-grow: 1;
+        }
+        .icon {
+            width: 40px; /* Размер иконки */
+            height: 40px;
+            margin-right: 10px; /* Отступ от текста */
+            animation: rotate 3s linear infinite; /* Плавное вращение */
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            flex: 1;
+        }
+        h2 {
+            color: #fff;
+        }
+        .server-info {
+            background-color: #444;
+            padding: 10px 20px; /* Уменьшены отступы */
+            margin-top: 20px;
+            border-radius: 10px;
+            min-height: 140px; /* Уменьшен минимальный размер */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .server-info p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 10px 10px 0 0;
+        }
+        .connect-btn {
+            background-color: #8a2be2; /* Фиолетовая кнопка */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px; /* Отступ сверху */
+        }
+        .connect-btn:hover {
+            background-color: #7a1dcb; /* Более темный фиолетовый при наведении */
+        }
+
+        /* Анимация для иконки */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .thank-you {
+            background-color: #444;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .thank-you p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn.discordapp.com/attachments/1253332984350769202/1325785968439197706/cdb42ed5138107cb.png?ex=677d0de6&is=677bbc66&hm=079c98b9cfb6983b715e675c02ca91bd0e6197de753538c1142980a92366b593&" alt="TF2 Icon" class="icon">
+        <h1>Сервер Team Fortress 2 от DProd LLC</h1>
+    </header>
+
+    <div class="container">
+        <h2>О сервере</h2>
+        <p>Добро пожаловать на наш сервер Team Fortress 2! Мы, команда <strong>DProd LLC</strong>, предлагаем уникальные игровые режимы, стабильную работу сервера и дружелюбное сообщество. Наслаждайтесь игрой и приглашайте друзей!</p>
+        
+        <div class="server-info">
+            <h3>Подключение к серверу</h3>
+            <p><strong>IP адрес:</strong> <span>e1.aurorix.net:20279</span></p>
+            <p>Чтобы присоединиться к нашему серверу, просто нажмите на кнопку ниже:</p>
+            <a href="https://source-servers.vercel.app/TF2" class="connect-btn" target="_blank">Подключиться к серверу</a>
+        </div>
+    </div>
+
+    <div class="thank-you">
+        <h3>Благодарности</h3>
+        <p><strong>DavuksDev/Donk:</strong> Идея для сайта, сервера, помощь в создании сервера.</p>
+        <p><strong>ChatGPT:</strong> Помощь в создании сайта.</p>
+        <p><strong>Сообщество DProd:</strong> Донаты на Boosty.</p>
+    </div>
+
+    <footer>
+        <p>© 2025 DProd LLC | Разработано DProd LLC для игрового сообщества</p>
+        <p>Все права защищены.</p>
+    </footer>
+</body>
+</html>
