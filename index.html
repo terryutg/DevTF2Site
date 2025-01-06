@@ -61,6 +61,15 @@
             margin-right: 10px; /* Отступ от текста */
             animation: rotate 3s linear infinite; /* Плавное вращение */
         }
+        /* Анимация для иконки */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
         .container {
             width: 80%;
             margin: 20px auto;
