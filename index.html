@@ -117,6 +117,35 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .copy-btn img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 1s ease, visibility 1s ease;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -131,7 +160,11 @@
         
         <div class="server-info">
             <h3>Подключение к серверу</h3>
-            <p><strong>IP адрес:</strong> <span>e1.aurorix.net:20279</span></p>
+            <p><strong>IP адрес:</strong> <span id="ip-address">e1.aurorix.net:20279</span>
+                <button class="copy-btn" onclick="copyToClipboard()">
+                    <img src="https://cdn.discordapp.com/attachments/1253332984350769202/1325804846720487567/copied-icon.png?ex=677d1f7b&is=677bcdfb&hm=e26e38fe69272db843566fd9edfd8f588ccad55cf474d4a6b15ee32a057ebdb3&" alt="Copy icon">
+                </button>
+            </p>
             <p>Чтобы присоединиться к нашему серверу, просто нажмите на кнопку ниже:</p>
             <a href="https://source-servers.vercel.app/TF2" class="connect-btn" target="_blank">Подключиться к серверу</a>
         </div>
@@ -148,5 +181,32 @@
         <p>© 2025 DProd LLC | Разработано DProd LLC для игрового сообщества</p>
         <p>Все права защищены.</p>
     </footer>
+
+    <div class="copy-notification" id="copy-notification">
+        IP адрес скопирован!
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("ip-address");
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent.trim();
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            
+            // Показываем уведомление
+            var notification = document.getElementById("copy-notification");
+            notification.style.visibility = "visible";
+            notification.style.opacity = "1";
+
+            // Убираем уведомление через 2 секунды
+            setTimeout(function() {
+                notification.style.opacity = "0";
+                notification.style.visibility = "hidden";
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
