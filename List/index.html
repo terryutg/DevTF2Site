@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Server List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #10171e;
+            color: #d8dee9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1b2838;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #66c0f4;
+        }
+        main {
+            padding: 20px;
+        }
+        .server-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .server {
+            background-color: #1e2a33;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .server h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #81a1c1;
+        }
+        .server p {
+            margin: 0 0 10px;
+        }
+        .server a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            color: #d8dee9;
+            background-color: #66c0f4;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .server a:hover {
+            background-color: #5a9ccf;
+        }
+        .server .additional-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .server .additional-buttons a {
+            padding: 8px 12px;
+            font-size: 0.9em;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e2a33;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            color: #d8dee9;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+        .modal p {
+            margin: 0 0 10px;
+        }
+        .modal button {
+            background-color: #66c0f4;
+            color: #d8dee9;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .modal button:hover {
+            background-color: #5a9ccf;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+    <script>
+        // Функция для загрузки JSON с Pastebin
+        function loadServerData() {
+            fetch('https://pastebin.com/raw/iTCWqV5p')  // Используем вашу ссылку на Pastebin
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Здесь можно обрабатывать данные
+                })
+                .catch(error => console.error('Error loading server data:', error));
+        }
+
+        // Функция для обработки подключения и закрытия окна через 2 секунды
+        function handleConnect(url) {
+            const win = window.open(url, '_blank');  // Открыть URL в новом окне
+            setTimeout(() => win.close(), 2000);  // Закрыть окно через 2 секунды
+        }
+
+        // Функция для отображения модального окна с информацией
+        function showModal(infoText) {
+            document.getElementById('modal-content').innerText = infoText;
+            document.querySelector('.modal').style.display = 'block';
+            document.querySelector('.overlay').style.display = 'block';
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            document.querySelector('.modal').style.display = 'none';
+            document.querySelector('.overlay').style.display = 'none';
+        }
+
+        // Загрузить данные при старте страницы
+        window.onload = loadServerData;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Game Server List</h1>
+    </header>
+    <main>
+        <div class="server-list">
+            <div class="server">
+                <h2>Team Fortress 2</h2>
+                <p>Join the action-packed world of Team Fortress 2!</p>
+                <a href="#" onclick="handleConnect('https://source-servers.vercel.app/TF2')">Connect</a>
+                <div class="additional-buttons">
+                    <a href="https://terryutg.github.io/DevTF2Site/" target="_blank">Info</a>
+                    <a href="#" onclick="handleDownload('https://source-servers.vercel.app/TFInstall')">Download</a>
+                </div>
+            </div>
+            <div class="server">
+                <h2>Half-Life 2 Deathmatch</h2>
+                <p>Experience the fast-paced multiplayer madness.</p>
+                <a href="#">Connect</a>
+                <div class="additional-buttons">
+                    <a href="#" onclick="showModal('Half-Life 2: Deathmatch is a multiplayer first-person shooter video game developed by Valve...')">Info</a>
+                    <a href="#" onclick="handleDownload('#')">Download</a>
+                </div>
+            </div>
+            <div class="server">
+                <h2>Counter-Strike: Global Offensive</h2>
+                <p>Test your skills in CS:GO competitive matches.</p>
+                <a href="#">Connect</a>
+                <div class="additional-buttons">
+                    <a href="#" onclick="showModal('Counter-Strike: Global Offensive (CS:GO) is a 2012 multiplayer tactical first-person shooter developed by Valve...')">Info</a>
+                    <a href="#" onclick="handleDownload('#')">Download</a>
+                </div>
+            </div>
+            <div class="server">
+                <h2>Synergy</h2>
+                <p>Co-op through the Half-Life 2 campaign with friends.</p>
+                <a href="#">Connect</a>
+                <div class="additional-buttons">
+                    <a href="#" onclick="showModal('Synergy: A cooperative multiplayer game.')">Info</a>
+                    <a href="#" onclick="handleDownload('#')">Download</a>
+                </div>
+            </div>
+            <div class="server">
+                <h2>Minecraft</h2>
+                <p>Build and explore in the endless blocky world.</p>
+                <a href="#">Connect</a>
+                <div class="additional-buttons">
+                    <a href="#" onclick="showModal('Minecraft: An open-world sandbox game.')">Info</a>
+                    <a href="#" onclick="handleDownload('#')">Download</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="overlay" onclick="closeModal()"></div>
+    <div class="modal">
+        <p id="modal-content"></p>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</body>
+</html>
