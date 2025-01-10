@@ -1,1 +1,1 @@
-this is front end of website
+this is frontend of website
